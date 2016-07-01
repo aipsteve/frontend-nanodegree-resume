@@ -154,7 +154,7 @@ $('#topContacts').prepend(formattedMobile);
 
 if(bio.skills.length > 0){
 	$('#header').append(HTMLskillsStart);
-	
+
 	var formattedSkill = HTMLskills.replace('%data%', bio.skills[0]);
 	$('#skills').append(formattedSkill);
 	var formattedSkill = HTMLskills.replace('%data%', bio.skills[1]);
@@ -169,4 +169,14 @@ if(bio.skills.length > 0){
 	$('#skills').append(formattedSkill);
 	var formattedSkill = HTMLskills.replace('%data%', bio.skills[6]);
 	$('#skills').append(formattedSkill);
+};
+
+for(i in work.jobs){
+	$('#workExperience').append(HTMLworkStart);
+
+	var formattedEmployer = HTMLworkEmployer.replace('%data%', work.jobs[i].employer);
+	var formattedTitle = HTMLworkTitle.replace('%data%', work.jobs[i].title);
+	var formattedEmployerTitle = formattedEmployer + formattedTitle;
+
+	$('.work-entry:last').append(formattedEmployer, formattedTitle);
 }
