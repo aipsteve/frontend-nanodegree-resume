@@ -12,10 +12,46 @@ var bio = {
 	"welcomeMessage": "Welcome to my online resume.",
 	"skills": ["HTML5","CSS3","JavaScript","Bootstrap", "Angular", "CoffeeScript", "W3"],
 	"biopic": "http://buzzlantic.com/wp-content/uploads/2015/11/kylo-ren-150x150.jpg",
-	"display": function displayFunc(){
+	"display": function displayBio(){
+		var formattedName = HTMLheaderName.replace('%data%', bio.name);
+		var formattedRole = HTMLheaderRole.replace('%data%', bio.role);
+		var formattedMobile = HTMLmobile.replace('%data%', bio.contacts.mobile);
+		var formattedEmail = HTMLemail.replace('%data%', bio.contacts.email);
+		var formattedGithub = HTMLgithub.replace('%data%', bio.contacts.github);
+		var formattedTwitter = HTMLtwitter.replace('%data%', bio.contacts.twitter);
+		var formattedLocation = HTMLlocation.replace('%data%', bio.contacts.location);
+		var formattedBioPic = HTMLbioPic.replace('%data%', bio.biopic);
+		var formattedWelcomeMsg = HTMLwelcomeMsg.replace('%data%', bio.welcomeMessage);
 
+		$('#header').prepend(formattedRole);
+		$('#header').prepend(formattedName);
+		$('#header').append(formattedBioPic);
+		$('#header').append(formattedWelcomeMsg);
+		$('#topContacts').prepend(formattedLocation);
+		$('#topContacts').prepend(formattedTwitter);
+		$('#topContacts').prepend(formattedGithub);
+		$('#topContacts').prepend(formattedEmail);
+		$('#topContacts').prepend(formattedMobile);
+
+		if(bio.skills.length > 0){
+			$('#header').append(HTMLskillsStart);
+
+			var formattedSkill = HTMLskills.replace('%data%', bio.skills[0]);
+			$('#skills').append(formattedSkill);
+			var formattedSkill = HTMLskills.replace('%data%', bio.skills[1]);
+			$('#skills').append(formattedSkill);
+			var formattedSkill = HTMLskills.replace('%data%', bio.skills[2]);
+			$('#skills').append(formattedSkill);
+			var formattedSkill = HTMLskills.replace('%data%', bio.skills[3]);
+			$('#skills').append(formattedSkill);
+			var formattedSkill = HTMLskills.replace('%data%', bio.skills[4]);
+			$('#skills').append(formattedSkill);
+			var formattedSkill = HTMLskills.replace('%data%', bio.skills[5]);
+			$('#skills').append(formattedSkill);
+			var formattedSkill = HTMLskills.replace('%data%', bio.skills[6]);
+			$('#skills').append(formattedSkill);
+		};
 	}
-
 };
 
 var education = {
@@ -67,7 +103,7 @@ var work = {
 		{
 			"employer": "Protek IT Solutions",
 			"title": "IT Technician",
-			"location": "",
+			"location": "Simi Valley, CA",
 			"dates": "April 2015 - Present",
 			"description": "System Administration, General Troubleshooting, IT Consulting."
 		},
@@ -93,8 +129,22 @@ var work = {
 			"description": "Freelance computer assistance for individuals and small companies. Workstation setup, web design, server setup and maintenance."
 		},
 	],
-	"display": function displayFunc(){
+	"display": function displayWork(){
+		for(i in work.jobs){
+			$('#workExperience').append(HTMLworkStart);
 
+			var formattedEmployer = HTMLworkEmployer.replace('%data%', work.jobs[i].employer);
+			var formattedTitle = HTMLworkTitle.replace('%data%', work.jobs[i].title);
+			var formattedEmployerTitle = formattedEmployer + formattedTitle;
+			var formattedWorkDates = HTMLworkDates.replace('%data%', work.jobs[i].dates);
+			var formattedWorkLocation = HTMLworkLocation.replace('%data%', work.jobs[i].location);
+			var formattedWorkDescription = HTMLworkDescription.replace('%data%', work.jobs[i].description);
+
+			$('.work-entry:last').append(formattedEmployerTitle);
+			$('.work-entry:last').append(formattedWorkDates);
+			$('.work-entry:last').append(formattedWorkLocation);
+			$('.work-entry:last').append(formattedWorkDescription);
+		}
 	}
 };
 
@@ -130,53 +180,38 @@ var projects = {
 	}
 };
 
-//Header variables
-var formattedName = HTMLheaderName.replace('%data%', bio.name);
-var formattedRole = HTMLheaderRole.replace('%data%', bio.role);
-var formattedMobile = HTMLmobile.replace('%data%', bio.contacts.mobile);
-var formattedEmail = HTMLemail.replace('%data%', bio.contacts.email);
-var formattedGithub = HTMLgithub.replace('%data%', bio.contacts.github);
-var formattedTwitter = HTMLtwitter.replace('%data%', bio.contacts.twitter);
-var formattedLocation = HTMLlocation.replace('%data%', bio.contacts.location);
-var formattedBioPic = HTMLbioPic.replace('%data%', bio.biopic);
-var formattedWelcomeMsg = HTMLwelcomeMsg.replace('%data%', bio.welcomeMessage);
+// Takes locations of all jobs and puts them in an array
+function locationizer(work_obj) {
+	var locationArray = [];
 
-//header content
-$('#header').prepend(formattedRole);
-$('#header').prepend(formattedName);
-$('#header').append(formattedBioPic);
-$('#header').append(formattedWelcomeMsg);
-$('#topContacts').prepend(formattedLocation);
-$('#topContacts').prepend(formattedTwitter);
-$('#topContacts').prepend(formattedGithub);
-$('#topContacts').prepend(formattedEmail);
-$('#topContacts').prepend(formattedMobile);
-
-if(bio.skills.length > 0){
-	$('#header').append(HTMLskillsStart);
-
-	var formattedSkill = HTMLskills.replace('%data%', bio.skills[0]);
-	$('#skills').append(formattedSkill);
-	var formattedSkill = HTMLskills.replace('%data%', bio.skills[1]);
-	$('#skills').append(formattedSkill);
-	var formattedSkill = HTMLskills.replace('%data%', bio.skills[2]);
-	$('#skills').append(formattedSkill);
-	var formattedSkill = HTMLskills.replace('%data%', bio.skills[3]);
-	$('#skills').append(formattedSkill);
-	var formattedSkill = HTMLskills.replace('%data%', bio.skills[4]);
-	$('#skills').append(formattedSkill);
-	var formattedSkill = HTMLskills.replace('%data%', bio.skills[5]);
-	$('#skills').append(formattedSkill);
-	var formattedSkill = HTMLskills.replace('%data%', bio.skills[6]);
-	$('#skills').append(formattedSkill);
-};
-
-for(i in work.jobs){
-	$('#workExperience').append(HTMLworkStart);
-
-	var formattedEmployer = HTMLworkEmployer.replace('%data%', work.jobs[i].employer);
-	var formattedTitle = HTMLworkTitle.replace('%data%', work.jobs[i].title);
-	var formattedEmployerTitle = formattedEmployer + formattedTitle;
-
-	$('.work-entry:last').append(formattedEmployer, formattedTitle);
+	for (job in work_obj.jobs) {
+		var newLocation = work_obj.jobs[job].location;
+		locationArray.push(newLocation);
+	}
+	return locationArray;
 }
+
+console.log(locationizer(work));
+
+//International version of my name
+function inName(full_name) {
+	full_name = full_name.trim().split(' ');
+	full_name[1] = full_name[1].toUpperCase();
+	full_name[0] = full_name[0].slice(0,1).toUpperCase() +
+		full_name[0].slice(1).toLowerCase();
+	return full_name[0] +' '+full_name[1];
+};
+$("#main").append(internationalizeButton);
+//inName(bio.name);
+
+// I have no idea why this is needed for this project
+$(document).click(function(loc) {
+	var x = loc.pageX;
+	var y = loc.pageY;
+
+	logClicks(x,y);
+});
+
+
+work.display();
+bio.display();
