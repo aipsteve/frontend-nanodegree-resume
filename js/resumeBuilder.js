@@ -62,7 +62,7 @@ var education = {
 			"degree": "N/A",
 			"majors": "N/A",
 			"dates": "1997 - 1999",
-			"url": "N/A"
+			"url": ""
 		},
 		{
 			"name": "CA CHSPE Examination",
@@ -94,7 +94,37 @@ var education = {
 		}
 	],
 	"display": function displayFunc(){
+		for (i in education.schools){
+			$('#education').append(HTMLschoolStart);
 
+			var formattedName = HTMLschoolName.replace('%data%', education.schools[i].name);
+			var formattedLocation = HTMLschoolLocation.replace('%data%', education.schools[i].location);
+			var formattedDegree = HTMLschoolDegree.replace('%data%', education.schools[i].degree);
+			var formattedMajors = HTMLschoolMajor.replace('%data%', education.schools[i].majors);
+			var formattedDates = HTMLschoolDates.replace('%data%', education.schools[i].dates);
+			var formattedURL = HTMLschoolName.replace('#', education.schools[i].url);
+			var formattedNameDegree = formattedName + formattedDegree;
+			
+
+			$('.education-entry:last').append(formattedNameDegree);
+			$('.education-entry:last').append(formattedDates);
+			$('.education-entry:last').append(formattedLocation);
+			$('.education-entry:last').append(formattedMajors);
+		};
+
+		$('#education').append(HTMLonlineClasses);
+
+		for (o in education.onlineCourses) {
+			var formattedOnTitle = HTMLonlineTitle.replace('%data%', education.onlineCourses[o].title);
+			var formattedOnSchool = HTMLonlineSchool.replace('%data%', education.onlineCourses[o].school);
+			var formattedOnDates = HTMLonlineDates.replace('%data%', education.onlineCourses[o].dates);
+			var formattedOnURL = HTMLonlineURL.replace('#', education.onlineCourses[o].url).replace('%data%', education.onlineCourses[o].url);
+			var formattedOnTitleSchool = formattedOnTitle + formattedOnSchool;
+
+			$('.education-entry:last').append(formattedOnTitleSchool);
+			$('.education-entry:last').append(formattedOnDates);
+			$('.education-entry:last').append(formattedOnURL);
+		};
 	}
 };
 
@@ -155,7 +185,7 @@ var projects = {
 			"dates": "June 2016 - Present",
 			"description": "Bootstrap site for St. Louis painting and restoration company.",
 			"images": [
-				"https://i.imgsafe.org/5edfaf3794.jpg"
+				"https://i.imgsafe.org/b47376fecc.jpg"
 			]
 		},
 		{
@@ -163,7 +193,7 @@ var projects = {
 			"dates": "May 2016 - Present",
 			"description": "Website for a local bakery.",
 			"images": [
-				"https://i.imgsafe.org/5ed8d8cd97.png"
+				"https://i.imgsafe.org/b47364e806.jpg"
 			]
 		},
 		{
@@ -171,12 +201,24 @@ var projects = {
 			"dates": "June 2016 - Present",
 			"description": "Homepage for my own small business.",
 			"images": [
-				"https://i.imgsafe.org/5ed8c01d7b.png"
+				"https://i.imgsafe.org/b473543d62.jpg"
 			]
 		}
 	],
 	"display": function displayFunc(){
+		for (i in projects.projects) {
+			$('#projects').append(HTMLprojectStart);
 
+			var formattedTitle = HTMLprojectTitle.replace('%data%', projects.projects[i].title);
+			var formattedDates = HTMLprojectDates.replace('%data%', projects.projects[i].dates);
+			var formattedDescription = HTMLprojectDescription.replace('%data%', projects.projects[i].description);
+			var formattedImages = HTMLprojectImage.replace('%data%', projects.projects[i].images);
+
+			$('.project-entry:last').append(formattedTitle);
+			$('.project-entry:last').append(formattedDates);
+			$('.project-entry:last').append(formattedDescription);
+			$('.project-entry:last').append(formattedImages);
+		};
 	}
 };
 
@@ -212,6 +254,11 @@ $(document).click(function(loc) {
 	logClicks(x,y);
 });
 
-
+//Function calls to display resume content
 work.display();
 bio.display();
+projects.display();
+education.display();
+
+//Display map of work and home locations
+$('#mapDiv').append(googleMap);
