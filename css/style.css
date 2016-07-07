@@ -26,7 +26,7 @@ h6 {
 
 h1 {
   font-size: 40px;
-  color: #f5a623;
+  color: #c63d0f;
   line-height: 48px;
   display: inline;
 }
@@ -105,11 +105,11 @@ a {
 }
 
 .orange {
-  background-color: #f5ae23;
+  background-color: #c63d0f;
 }
 
 .orange-text {
-  color: #f5ae23;
+  color: #c63d0f;;
 }
 
 .white-text {
@@ -118,7 +118,7 @@ a {
 }
 
 .gray {
-  background-color: #f3f3f3;
+  background-color: #FDF3E7;
   padding-bottom: 10px;
   clear:both;
 }
@@ -139,6 +139,17 @@ a {
   flex-wrap: wrap;
   justify-content: space-around;
   padding: 10px;
+}
+
+.flex-ul{
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 10px;
+  padding-left: 30px;
+  list-style-type:disc;
 }
 
 .center-content {
@@ -211,4 +222,8 @@ span {
   .biopic {
     display: block;
   }
+}
+
+#skills-h3 {
+  color: #c63d0f;
 }

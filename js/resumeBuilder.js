@@ -26,35 +26,31 @@ var bio = {
         $('#header').prepend(formattedName);
         $('#header').append(formattedBioPic);
         $('#header').append(formattedWelcomeMsg);
-        $('#topContacts').prepend(formattedLocation);
-        $('#topContacts').prepend(formattedTwitter);
-        $('#topContacts').prepend(formattedGithub);
-        $('#topContacts').prepend(formattedEmail);
-        $('#topContacts').prepend(formattedMobile);
-
-        $('#footerContacts').prepend(formattedLocation);
-        $('#footerContacts').prepend(formattedTwitter);
-        $('#footerContacts').prepend(formattedGithub);
-        $('#footerContacts').prepend(formattedEmail);
-        $('#footerContacts').prepend(formattedMobile);
+        
+        $('#topContacts, #footerContacts').prepend(formattedMobile, formattedEmail, formattedGithub, formattedTwitter, formattedLocation);
 
         if (bio.skills.length > 0) {
             $('#header').append(HTMLskillsStart);
 
-            var formattedSkill = HTMLskills.replace('%data%', bio.skills[0]);
-            $('#skills').append(formattedSkill);
-            var formattedSkill = HTMLskills.replace('%data%', bio.skills[1]);
-            $('#skills').append(formattedSkill);
-            var formattedSkill = HTMLskills.replace('%data%', bio.skills[2]);
-            $('#skills').append(formattedSkill);
-            var formattedSkill = HTMLskills.replace('%data%', bio.skills[3]);
-            $('#skills').append(formattedSkill);
-            var formattedSkill = HTMLskills.replace('%data%', bio.skills[4]);
-            $('#skills').append(formattedSkill);
-            var formattedSkill = HTMLskills.replace('%data%', bio.skills[5]);
-            $('#skills').append(formattedSkill);
-            var formattedSkill = HTMLskills.replace('%data%', bio.skills[6]);
-            $('#skills').append(formattedSkill);
+            bio.skills.forEach(function(val, i){
+                var formattedSkill = HTMLskills.replace('%data%', bio.skills[i]);
+                $('#skills').append(formattedSkill);
+            })
+
+//            var formattedSkill = HTMLskills.replace('%data%', bio.skills[0]);
+//            $('#skills').append(formattedSkill);
+//            var formattedSkill = HTMLskills.replace('%data%', bio.skills[1]);
+//            $('#skills').append(formattedSkill);
+//            var formattedSkill = HTMLskills.replace('%data%', bio.skills[2]);
+//            $('#skills').append(formattedSkill);
+//            var formattedSkill = HTMLskills.replace('%data%', bio.skills[3]);
+//            $('#skills').append(formattedSkill);
+//            var formattedSkill = HTMLskills.replace('%data%', bio.skills[4]);
+//            $('#skills').append(formattedSkill);
+//            var formattedSkill = HTMLskills.replace('%data%', bio.skills[5]);
+//            $('#skills').append(formattedSkill);
+//            var formattedSkill = HTMLskills.replace('%data%', bio.skills[6]);
+//            $('#skills').append(formattedSkill);
         }
     }
 };
@@ -92,7 +88,7 @@ var education = {
         "url": "https://www.udemy.com/ccna-on-demand-video-boot-camp/learn/v4/overview"
     }],
     "display": function displayFunc() {
-        for (var i in education.schools) {
+        education.schools.forEach(function(val, i) {
             $('#education').append(HTMLschoolStart);
 
             var formattedName = HTMLschoolName.replace('%data%', education.schools[i].name).replace('#', education.schools[i].url);
@@ -107,11 +103,11 @@ var education = {
             $('.education-entry:last').append(formattedDates);
             $('.education-entry:last').append(formattedLocation);
             $('.education-entry:last').append(formattedMajors);
-        }
+        })
 
         $('.education-entry:last').append(HTMLonlineClasses);
 
-        for (var o in education.onlineCourses) {
+        education.onlineCourses.forEach(function (val, o) {
             var formattedOnTitle = HTMLonlineTitle.replace('%data%', education.onlineCourses[o].title);
             var formattedOnSchool = HTMLonlineSchool.replace('%data%', education.onlineCourses[o].school);
             var formattedOnDates = HTMLonlineDates.replace('%data%', education.onlineCourses[o].dates);
@@ -121,7 +117,7 @@ var education = {
             $('.education-entry:last').append(formattedOnTitleSchool);
             $('.education-entry:last').append(formattedOnDates);
             $('.education-entry:last').append(formattedOnURL);
-        }
+        })
     }
 };
 
@@ -152,7 +148,7 @@ var work = {
         "description": "Freelance computer assistance for individuals and small companies. Workstation setup, web design, server setup and maintenance."
     }, ],
     "display": function displayWork() {
-        for (var i in work.jobs) {
+        work.jobs.forEach(function(val, i) {
             $('#workExperience').append(HTMLworkStart);
 
             var formattedEmployer = HTMLworkEmployer.replace('%data%', work.jobs[i].employer);
@@ -166,7 +162,7 @@ var work = {
             $('.work-entry:last').append(formattedWorkDates);
             $('.work-entry:last').append(formattedWorkLocation);
             $('.work-entry:last').append(formattedWorkDescription);
-        }
+        })
     }
 };
 
@@ -194,19 +190,23 @@ var projects = {
         ]
     }],
     "display": function displayFunc() {
-        for (var i in projects.projects) {
+        projects.projects.forEach(function(val, i) {
             $('#projects').append(HTMLprojectStart);
 
             var formattedTitle = HTMLprojectTitle.replace('%data%', projects.projects[i].title);
             var formattedDates = HTMLprojectDates.replace('%data%', projects.projects[i].dates);
             var formattedDescription = HTMLprojectDescription.replace('%data%', projects.projects[i].description);
-            var formattedImages = HTMLprojectImage.replace('%data%', projects.projects[i].images);
+            projects.projects[i].images.forEach(function(val, o){
+                var formattedImages = HTMLprojectImage.replace('%data%', projects.projects[i].images[o]);
+                $('.project-entry:last').append(formattedImages);
+            })
 
             $('.project-entry:last').append(formattedTitle);
             $('.project-entry:last').append(formattedDates);
             $('.project-entry:last').append(formattedDescription);
-            $('.project-entry:last').append(formattedImages);
-        }
+        })
+
+        
     }
 };
 
